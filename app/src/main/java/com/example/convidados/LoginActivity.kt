@@ -40,6 +40,9 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun login(email: String, password: String) {
+        if (email.isEmpty() || password.isEmpty()){
+            Toast.makeText(this, "Preencha login e senha", Toast.LENGTH_SHORT).show()
+        }
         try {
             databaseApp = openOrCreateDatabase("dbGuestApp", MODE_PRIVATE, null)
             val cursor: Cursor = databaseApp.rawQuery(
@@ -52,10 +55,13 @@ class LoginActivity : AppCompatActivity() {
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                 startActivity(intent)
 
-            } else {
+            }
+            else {
                 Toast.makeText(this, "Usuário ou senha incorretas", Toast.LENGTH_SHORT).show()
             }
-        } catch (e: Exception) {
+
+
+        } catch (e: Exception) {1
             e.printStackTrace()
         }
 
